@@ -37,11 +37,14 @@ class HomeView(LoginRequiredMixin, View):
 def playing(request):
     user = request.user
     trackID = request.POST.get('trackID')
-    track = Track.object.get(track_id=trackID)
-    PlayingTrack.object.all().delete()
-    playingTrack = PlayingTrack(track=track, user=user)
-    playingTrack.track.rate += 1
-    playingTrack.save()
+    try:
+        track = Track.object.get(track_id=trackID)
+        PlayingTrack.object.all().delete()
+        playingTrack = PlayingTrack(track=track, user=user)
+        playingTrack.track.rate += 1
+        playingTrack.save()
+    except Track.DoesNotExist:
+        pass
 
     return redirect('playing_track/')
 
