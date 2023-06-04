@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Bảng xếp hạng{% endblock %}
+
+{% block content %}
+<!-- Tab charts -->
+<div class="app__container tab--charts active">
+    <div class="app__container-content">
+        <div class="charts__container">
+            <div class="grid">
+                <div class="chart__container-header mb-40">
+                    <h3 class="chart__header-name"><div id="zingchart"></div>chiuchart</h3>
+                    <div class="chart__header-btn">
+                        <i class="bi bi-play-fill chart__header-icon"></i>
+                    </div>
+                </div>
+                <div class="row no-gutters chart--container mt-10 mb-20 expand-song">
+                    <div class=" col l-12 m-12 c-12">
+                        <div class="container__playlist">
+                            <div class="playlist__list-charts overflow-visible">
+                                {% for i, track in chartList %}
+                                <form method="post" action="{% url 'playing' %}">
+                                {% csrf_token %}
+                                {% for key, value in form.errors.items %}
+                                    {{value}}
+                                {% endfor %}
+                                    <input type="text" name="trackID" value="{{ track.track.track_id }}" style="display: none">
+                                <div class="playlist__list-song media {% if i > 9 %}song--not-expand{% endif %}">
+                                    <div class="playlist__song-info media__left">
+                                        <div class="playlist__song-rank">
+                                            <div class="playlist__rank-number is-outline--blue">{{ i }}</div>
+                                            <div class="playlist__rank-icon">
+                                                <i class="bi bi-dash-lg"></i>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-thumb media__thumb mr-10"
+                                             style="background: url('{{MEDIA_URL}}/media/{{ track.avatar }}') no-repeat center center / cover">
+                                            <div class="thumb--animate">
+                                                <div class="thumb--animate-img"
+                                                     style="background: url('{% static 'images/SongActiveAnimation/icon-playing.gif' %}') no-repeat 50% / contain">
+                                                </div>
+                                            </div>
+                                            <div class="play-song--actions">
+                                                <div class="control-btn btn-toggle-play">
+                                                    <i class="bi bi-play-fill"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-body media__info">
+                                            <span class="playlist__song-title info__title">{{ track.track_name }}</span>
+                                            <p class="playlist__song-author info__author">
+                                                <a href="#" class="is-ghost">{{ track.user }}</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span class="playlist__song-time media__content">{{ track.duration }}</span>
+                                    <div class="playlist__song-option song--tab media__right hide-on-mobile">
+                                        <input class="submitBtn" type="submit" value="Play"
+                                                           style="background-color: #7200a1; color: #fff; font-size:14;">
+                                        <div class="playlist__song-btn btn--heart option-btn">
+                                            <i class="btn--icon song__icon icon--heart bi bi-heart-fill primary"></i>
+                                        </div>
+                                        <div class="playlist__song-btn option-btn">
+                                            <i class="btn--icon bi bi-three-dots"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="charts__expand">
+                    <button class="button charts__expand-btn">Xem top 100</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Tạo danh sách phát{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'create_playlist' %}">
+    {% csrf_token %}
+    {% for key, value in form.errors.items %}
+        {{value}}
+    {% endfor %}
+    <div style="margin: 100px;">
+        <h1 style="color: #fff;">Tạo danh sách phát</h1>
+        <h3 style="color: #fff;">Tên danh sách:</h3>
+        <input type="text" name="name">
+        <h3 style="color: #fff;">Ảnh bìa:</h3>
+<!--        <input type="image" name="img">-->
+        <input type="file" accept="image/*"  name="img"/>
+        <input type="hidden">
+        <input type="submit" value="Tạo">
+    </div>
+</form>
+{% endblock %}

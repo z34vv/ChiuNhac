@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tìm kiếm{% endblock %}
+
+{% block content %}
+<!-- Tab tìm kiếm -->
+<div class="app__container active" id="timkiem">
+    <div class="app__container-content">
+        <div class="charts__container">
+            <div class="grid">
+                <div class="chart__container-header mb-40">
+                    <h3 class="chart__header-name">Tìm kiếm</h3>
+                    <div class="chart__header-btn">
+                        <i class="bi bi-play-fill chart__header-icon"></i>
+                    </div>
+                </div>
+                <div class="row no-gutters chart--container mt-10 mb-20">
+                    <div class=" col l-12 m-12 c-12">
+                        <div class="container__playlist">
+                            <h1 style="color: #fff">Kết quả tìm kiếm cho từ khoá '{{ query }}':</h1>
+                            <h2 style="color: #fff">Bài hát:</h2>
+                            <div class="playlist__list-charts overflow-visible">
+                                {% for track in searchTracks %}
+                                <div class="playlist__list-song media ">
+                                    <div class="playlist__song-info media__left">
+                                        <div class="playlist__song-rank">
+                                            <div class="playlist__rank-icon">
+                                                <i class="bi bi-dash-lg"></i>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-thumb media__thumb mr-10"
+                                             style="background: url('{{ MEDIA_URL }}/media/{{ track.avatar }}') no-repeat center center / cover">
+                                            <div class="thumb--animate">
+                                                <div class="thumb--animate-img"
+                                                     style="background: url('./assets/img/SongActiveAnimation/icon-playing.gif') no-repeat 50% / contain">
+                                                </div>
+                                            </div>
+                                            <div class="play-song--actions">
+                                                <div class="control-btn btn-toggle-play">
+                                                    <i class="bi bi-play-fill"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-body media__info">
+                                            <span class="playlist__song-title info__title">{{ track.track_name }}</span>
+                                            <p class="playlist__song-author info__author">
+
+                                                <a href="#" class="is-ghost">{{ track.user }}</a>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span class="playlist__song-time media__content">{{ track.duration }}</span>
+                                    <div class="playlist__song-option song--tab media__right hide-on-mobile">
+                                        <div class="playlist__song-btn btn--mic option-btn">
+                                            <i class="btn--icon song__icon bi bi-mic-fill"></i>
+                                        </div>
+                                        <div class="playlist__song-btn btn--heart option-btn">
+                                            <i class="btn--icon song__icon icon--heart bi bi-heart-fill primary"></i>
+                                        </div>
+                                        <div class="playlist__song-btn option-btn">
+                                            <i class="btn--icon bi bi-three-dots"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div><br>
+                            <h2 style="color: #fff">MV:</h2>
+                            <div class="playlist__list-charts overflow-visible">
+                                {% for mv in searchMVs %}
+                                <div class="playlist__list-song media ">
+                                    <div class="playlist__song-info media__left">
+                                        <div class="playlist__song-rank">
+                                            <div class="playlist__rank-icon">
+                                                <i class="bi bi-dash-lg"></i>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-thumb media__thumb mr-10"
+                                             style="background: url('{{ MEDIA_URL }}/media/{{ mv.avatar }}') no-repeat center center / cover">
+                                            <div class="thumb--animate">
+                                                <div class="thumb--animate-img"
+                                                     style="background: url('./assets/img/SongActiveAnimation/icon-playing.gif') no-repeat 50% / contain">
+                                                </div>
+                                            </div>
+                                            <div class="play-song--actions">
+                                                <div class="control-btn btn-toggle-play">
+                                                    <i class="bi bi-play-fill"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-body media__info">
+                                            <span class="playlist__song-title info__title">{{ mv.mv_name }}</span>
+                                            <p class="playlist__song-author info__author">
+
+                                                <a href="#" class="is-ghost">{{ mv.user }}</a>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <span class="playlist__song-time media__content">{{ mv.duration }}</span>
+                                    <div class="playlist__song-option song--tab media__right hide-on-mobile">
+                                        <div class="playlist__song-btn btn--mic option-btn">
+                                            <i class="btn--icon song__icon bi bi-mic-fill"></i>
+                                        </div>
+                                        <div class="playlist__song-btn btn--heart option-btn">
+                                            <i class="btn--icon song__icon icon--heart bi bi-heart-fill primary"></i>
+                                        </div>
+                                        <div class="playlist__song-btn option-btn">
+                                            <i class="btn--icon bi bi-three-dots"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div><br>
+                            <h2 style="color: #fff">Album:</h2>
+                            <div class="playlist__list-charts overflow-visible">
+                                {% for album in searchAlbums %}
+                                <div class="playlist__list-song media ">
+                                    <div class="playlist__song-info media__left">
+                                        <div class="playlist__song-rank">
+                                            <div class="playlist__rank-icon">
+                                                <i class="bi bi-dash-lg"></i>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-thumb media__thumb mr-10"
+                                             style="background: url('{{ MEDIA_URL }}/media/{{ mv.avatar }}') no-repeat center center / cover">
+                                            <div class="thumb--animate">
+                                                <div class="thumb--animate-img"
+                                                     style="background: url('./assets/img/SongActiveAnimation/icon-playing.gif') no-repeat 50% / contain">
+                                                </div>
+                                            </div>
+                                            <div class="play-song--actions">
+                                                <div class="control-btn btn-toggle-play">
+                                                    <i class="bi bi-play-fill"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="playlist__song-body media__info">
+                                            <span class="playlist__song-title info__title">{{ album.album_name }}</span>
+                                            <p class="playlist__song-author info__author">
+
+                                                <a href="#" class="is-ghost">{{ album.user }}</a>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="playlist__song-option song--tab media__right hide-on-mobile">
+                                        <div class="playlist__song-btn btn--mic option-btn">
+                                            <i class="btn--icon song__icon bi bi-mic-fill"></i>
+                                        </div>
+                                        <div class="playlist__song-btn btn--heart option-btn">
+                                            <i class="btn--icon song__icon icon--heart bi bi-heart-fill primary"></i>
+                                        </div>
+                                        <div class="playlist__song-btn option-btn">
+                                            <i class="btn--icon bi bi-three-dots"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

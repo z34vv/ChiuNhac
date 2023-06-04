@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% for album in Albums %}
+        <h4>{{album.album_name}}</h4>
+    {% endfor %}
+    {% for playlist in Playlists %}
+        <h4>{{playlist.playlist_name}}</h4>
+    {% endfor %}
+    {% for style in Styles %}
+        <h4>{{style.style_name}}</h4>
+    {% endfor %}
+    {% for track in Tracks %}
+        <h4>{{track.track_name}}</h4>
+    {% endfor %}
+    {% for mv in MVs %}
+        <h4>{{mv.mv_name}}</h4>
+    {% endfor %}
+</body>
+</html>

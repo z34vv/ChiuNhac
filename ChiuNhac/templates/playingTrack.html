@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block playing %}
+<div class="trackContent">
+    <div class="circle-image">
+        <img src="{{ MEDIA_URL }}/media/{{ playingTrack.track.avatar }}" alt="Circle Image">
+    </div><br>
+    <h1 style="color: #fff; margin: 32px 16px">Đang phát: {{ playingTrack.track.track_name }}</h1>
+</div>
+{% endblock %}

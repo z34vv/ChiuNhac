@@ -1,0 +1,21 @@
+.trackContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.circle-image {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.circle-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}

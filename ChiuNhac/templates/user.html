@@ -1,0 +1,770 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Tab personal -->
+<!-- Tab personal -->
+    <div class="app__container tab--personal active">
+        <div class="app__header">
+            <div class="app__header-bg"
+                 style="background: url('{{ MEDIA_URL }}{{ avatar_url }}') no-repeat center center / cover;"></div>
+            <div class="app__header-overlay"></div>
+            <div class="app__header-container" id="app-header-custom">
+                <div class="app__header-user">
+                    <div class="app__user-avatar">
+                        <img src="{{ MEDIA_URL }}{{ avatar_url }}" alt="" class="app__user-img">
+                    </div>
+                    <span class="app__user-name">
+                        {{ user.username }}
+                        <i class="bi bi-pencil-square"
+                           id="pencil-icon"
+                           style="color: white;font-size: 15px;margin-left: 10px;margin-top: -10px;"
+                            onclick="showForm()">
+                        </i>
+                    </span>
+                    <form method="post" action="{% url 'repairName' %}" id="update-form" style="display: none;">
+                        {% csrf_token %}
+                        {% for key, value in form.errors.items %}
+                            {{value}}
+                        {% endfor %}
+                        <div class="update__name">
+                            <h3 style="color: #fff;">Ảnh bìa:</h3>
+                            <input type="file" accept="image/*"  name="img"/>
+                            <input type="text" id="input-field" placeholder="Nhập tên cần sửa..." name="new_name">
+                            <input type="submit" value="Cập nhật" id="update-button">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <div class="content__navbar">
+                <div class="content__navbar-container">
+                    <ul class="content__navbar-menu">
+                        <li class="content__navbar-item active" onclick="opentabsong(event,'tongquan')">
+                            <span>Tổng quan</span>
+                        </li>
+                        <li class="content__navbar-item"  onclick="opentabsong(event,'baihat')">
+                            <span>Bài hát</span>
+                        </li>
+                        <li class="content__navbar-item"onclick="opentabsong(event,'playlist')">
+                            <span>Playlist</span>
+                        </li>
+                        <li class="content__navbar-item hide-on-mobile" onclick="opentabsong(event,'album')">
+                            <span>Album</span>
+                        </li>
+                        <li class="content__navbar-item" onclick="opentabsong(event,'mv')">
+                            <span>MV</span>
+                        </li>
+                        <li class="content__navbar-item hide-on-mobile" onclick="opentabsong(event,'nghesi')">
+                            <span>Nghệ sĩ</span>
+                        </li>
+                        <li class="content__navbar-item hide-on-tablet-mobile" onclick="opentabsong(event,'tailen')">
+                            <span>Tải lên</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content__container">
+
+                <!-- Tab Home -->
+                <div class="grid container__tab tab-home mp3 active" id="tongquan">
+                    <!-- Play music -->
+                    <div class="container__control row">
+                        <div class="col l-12 m-12 c-12 mb-10">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Bài Hát&nbsp;</h3>
+                                    <i class="bi bi-chevron-right container__header-icon"></i>
+                                </a>
+                                <h3 class="container__header-subtitle">Bài Hát</h3>
+                                <div class="container__header-actions">
+                                    <div class="button is-small container__header-btn hide-on-mobile">
+                                        <input type="file" name="upload song" id="home__upload-input"
+                                               class="container__header-input">
+                                        <label for="home__upload-input">
+                                            <i class="bi bi-upload container__header-icon"></i>
+                                            Tải lên
+                                        </label>
+                                    </div>
+                                    <button class="button is-small button-primary container__header-btn btn--play-all">
+                                        <i class="bi bi-play-fill container__header-icon"></i>
+                                        <span>Phát tất cả</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="container__playmusic">
+                                <div class="container__slide hide-on-mobile">
+                                    <div class="container__slide-show">
+                                        <div class="container__slide-item first">
+                                            <div style="background: url('{% static 'images/slides/slide1.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item second">
+                                            <div style="background: url('{% static 'images/slides/slide2.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item third">
+                                            <div style="background: url('{% static 'images/slides/slide3.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide4.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide5.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide6.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide7.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide8.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide9.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide10.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide11.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide12.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide13.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                        <div class="container__slide-item fourth">
+                                            <div style="background: url('{% static 'images/slides/slide14.jpg' %}') no-repeat center center / cover"
+                                                 class="container__slide-img"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container__playlist">
+                                    <div class="playlist__list">
+                                        {% for track in likeTracks %}
+                                        <form method="post" action="{% url 'playing' %}">
+                                            {% csrf_token %}
+                                            {% for key, value in form.errors.items %}
+                                                {{value}}
+                                            {% endfor %}
+                                            <input type="text" name="trackID" value="{{ track.track.track_id }}" style="display: none">
+                                            <div class="playlist__list-song media chooseTrack" data-index="0">
+                                                <div class="playlist__song-info media__left">
+                                                    <div class="playlist__song-thumb media__thumb mr-10"
+                                                         style="background: url('{{ MEDIA_URL }}/media/{{ track.track.avatar }}') no-repeat center center / cover">
+                                                        <div class="thumb--animate">
+                                                            <div class="thumb--animate-img"
+                                                                 style="background: url('{% static 'images/SongActiveAnimation/icon-playing.gif' %}') no-repeat 50% / contain">
+                                                            </div>
+                                                        </div>
+                                                        <div class="play-song--actions">
+                                                            <div class="control-btn btn-toggle-play btn--play-song">
+                                                                <i class="bi bi-play-fill"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="playlist__song-body media__info">
+                                                        <span class="playlist__song-title info__title">{{ track.track.track_name }}</span>
+                                                        <p class="playlist__song-author info__author">
+                                                            <a href="#" class="is-ghost">{{ track.track.user }}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <span class="playlist__song-time media__content">{{ track.track.duration }}</span>
+                                                <div class="playlist__song-option  media__right">
+                                                    <input class="submitBtn" type="submit" value="Play"
+                                                           style="background-color: #7200a1; color: #fff; font-size:14;">
+                                                    <div class="playlist__song-btn song-btn--heart option-btn hide-on-mobile">
+                                                        <i class="btn--icon song__icon icon--heart bi bi-heart-fill primary"></i>
+                                                    </div>
+                                                    <div class="playlist__song-btn option-btn hide-on-tablet">
+                                                        <i class="btn--icon bi bi-three-dots"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Playlist -->
+                    <div class="container__section row">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Playlist&nbsp;</h3>
+                                    <i class="bi bi-chevron-right container__header-icon"></i>
+                                </a>
+                                <h3 class="container__header-subtitle">Playlist</h3>
+                                <div class="container__header-actions hide-on-tablet-mobile">
+                                    <div class="container__move-btn move-btn--playlist" onclick="currentSlide(-1,'slide-playlist')">
+                                        <i class="bi bi-chevron-left container__move-btn-icon"></i>
+                                    </div>
+                                    <div class="container__move-btn move-btn--playlist" onclick="plusSlides(1, 'slide-playlist')">
+                                        <i class="bi bi-chevron-right container__move-btn-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row no-wrap playlist--container">
+                                <div class="col l-2-4 m-3 c-4 ">
+                                    <div class="row__item  playlist--create item--playlist">
+                                        <div class="row__item-container flex--center item-create--properties">
+                                            <a href="{% url 'create_playlist_form' %}">
+                                                <i class="bi bi-plus-lg album__create-icon"></i>
+                                            </a>
+                                            <span class="album__create-annotate text-center">Tạo playlist mới</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for playlist in Playlists %}
+                                <div class="col l-2-4 m-3 c-4 slide-playlist">
+                                    <div class="row__item item--playlist">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display br-5">
+                                                <div class="row__item-img img--square"
+                                                     style="background: url('{{ MEDIA_URL }}/media/{{ playlist.avatar }}') no-repeat center center / cover"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="action-btn btn--heart">
+                                                        <i class="btn--icon icon--heart bi bi-heart-fill primary"></i>
+                                                    </div>
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action-btn">
+                                                        <i class="btn--icon bi bi-three-dots"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="row__item-info">
+                                                <a href="#" class="row__info-name is-twoline">{{ playlist.playlist_name }}</a>
+                                                <h3 class="row__info-creator">Zing MP3</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Album -->
+                    <div class="container__section row mt-50">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Album&nbsp;</h3>
+                                    <i class="bi bi-chevron-right container__header-icon"></i>
+                                </a>
+                                <h3 class="container__header-subtitle">Album</h3>
+                                <div class="container__header-actions hide-on-tablet-mobile">
+                                    <div class="container__move-btn move-btn--album" onclick="currentSlide(1,  'slide-album')">
+                                        <i class="bi bi-chevron-left container__move-btn-icon"></i>
+                                    </div>
+                                    <div class="container__move-btn move-btn--album" onclick="plusSlides(1, 'slide-album')">
+                                        <i class="bi bi-chevron-right container__move-btn-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row no-wrap album--container">
+                                {% for album in likeAlbums %}
+                                <div class="col l-2-4 m-3 c-4 slide-album">
+                                    <div class="row__item item--album">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display br-5">
+                                                <div class="row__item-img img--square"
+                                                     style="background: url('{{ MEDIA_URL }}/media/{{ album.avatar }}') no-repeat center center / cover"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="action-btn btn--heart">
+                                                        <i class="btn--icon icon--heart bi bi-heart-fill primary"></i>
+                                                    </div>
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill icon-play"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action-btn">
+                                                        <i class="btn--icon bi bi-three-dots"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="row__item-info">
+                                                <a href="#" class="row__info-name is-twoline">{{ album.album_name }} - {{ album.user }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MV -->
+                    <div class="container__section row mt-50">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>MV&nbsp;</h3>
+                                    <i class="bi bi-chevron-right container__header-icon"></i>
+                                </a>
+                                <h3 class="container__header-subtitle">MV</h3>
+                                <div class="container__header-actions hide-on-tablet-mobile">
+                                    <div class="container__move-btn move-btn--mv" onclick="currentSlide(1, 'slide-mv')">
+                                        <i class="bi bi-chevron-left container__move-btn-icon"></i>
+                                    </div>
+                                    <div class="container__move-btn move-btn--mv" onclick="plusSlides(1, 'slide-mv')">
+                                        <i class="bi bi-chevron-right container__move-btn-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row no-wrap mv--container">
+                                {% for mv in likeMVs %}
+                                <div class="col l-4 m-6 c-12 slide-mv">
+                                    <div class="row__item item--mv">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display br-5">
+                                                <div class="row__item-img img--mv"
+                                                     style="background: url('{{ MEDIA_URL }}/media/{{ mv.avatar }}') no-repeat center center / cover"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="action-btn mv-btn--close">
+                                                        <i class="bi bi-x-lg btn--icon"></i>
+                                                    </div>
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill icon-play"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                                <div class="mv__time">{{ mv.duration }}</div>
+                                            </div>
+                                            <div class="row__item-info media">
+                                                <div class="media__left">
+                                                    <div class="media__thumb is-rounded mr-10"
+                                                         style="background: url('./assets/img/mvArtists/artist1.jpg') no-repeat center center / cover"></div>
+                                                    <div class="media__info">
+                                                        <span class="info__title is-active is-twoline">{{ mv.mv_name }}</span>
+                                                        <p class="info__author">
+
+                                                            <a href="#" class="is-ghost">{{ mv.artist }}</a>
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Artist -->
+                    <div class="container__section row mt-30">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Nghệ Sĩ&nbsp;</h3>
+                                    <i class="bi bi-chevron-right container__header-icon"></i>
+                                </a>
+                                <h3 class="container__header-subtitle">Nghệ Sĩ</h3>
+                                <div class="container__header-actions hide-on-tablet-mobile">
+                                    <div class="container__move-btn move-btn--artist" onclick="currentSlide(1, 'slide-artist')">
+                                        <i class="bi bi-chevron-left container__move-btn-icon"></i>
+                                    </div>
+                                    <div class="container__move-btn move-btn--artist" onclick="plusSlides(1, 'slide-artist')">
+                                        <i class="bi bi-chevron-right container__move-btn-icon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row no-wrap artist--container">
+                                {% for artist in Artists %}
+                                <div class="col l-2-4 m-3 c-6 slide-artist">
+                                    <div class="row__item item--artist">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display is-rounded">
+                                                <div class="row__item-img img--square is-rounded"
+                                                     style="background: url('{{ MEDIA_URL }}/media/{{ artist.avatar }}') no-repeat center center / contain"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill icon-play"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="row__item-info media artist--info">
+                                                <div class="media__left">
+                                                    <div href="#"
+                                                         class="row__info-name is-ghost mt-15 lh-19 text-center">
+                                                        {{ artist.username }}
+                                                        <i class="bi bi-star-fill row__info-icon">
+                                                            <div class="icon-overlay"></div>
+                                                        </i>
+                                                    </div>
+                                                    <h3 class="row__info-creator text-center">265K quan tâm</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row__item-btn">
+                                                <button class="button is-small button-primary">
+                                                    <i class="bi bi-check2"></i>
+                                                    <span>&nbsp;Đã quan tâm</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Song section -->
+                <div class="grid container__tab tab-song mp3" id="baihat">
+                    <div class="row no-gutters">
+                        <div class="col l-12 m-12 c-12">
+                            <div class="container__header mb-10">
+                                <a href="#" class="container__header-title">
+                                    <h3>Bài Hát&nbsp;</h3>
+                                </a>
+                                <h3 class="container__header-subtitle">Bài Hát</h3>
+                                <div class="container__header-actions">
+                                    <div class="button is-small container__header-btn hide-on-mobile">
+                                        <input type="file" name="upload song" id="song__upload-input"
+                                               class="container__header-input">
+                                        <label for="song__upload-input">
+                                            <i class="bi bi-upload container__header-icon"></i>
+                                            Tải lên
+                                        </label>
+                                    </div>
+                                    <button class="button is-small button-primary container__header-btn btn--play-all">
+                                        <i class="bi bi-play-fill container__header-icon"></i>
+                                        <span>Phát tất cả</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" col l-12 m-12 c-12">
+                            <div class="container__playlist">
+                                <div class="playlist__header mt-5">
+                                    <span class="playlist__header-title">Bài hát</span>
+                                    <span class="playlist__header-time">Thời gian</span>
+                                </div>
+                                <div class="playlist__list mb-30 overflow-visible">
+                                    {% for track in likeTracks %}
+                                    <div class="playlist__list-song media active" data-index="0">
+                                        <div class="playlist__song-info media__left">
+
+                                            <div class="playlist__song-check">
+                                                <input type="checkbox" name="" id="playlist__check-0" class="mr-10" style="display: none">
+                                                <label for="playlist__check-0"></label>
+                                            </div>
+                                            <i class="bi bi-music-note-beamed mr-10"></i>
+
+                                            <div class="playlist__song-thumb media__thumb mr-10" style="background: url('{{ MEDIA_URL }}/media/{{ track.track.avatar }}') no-repeat center center / cover">
+                                                <div class="thumb--animate">
+                                                    <div class="thumb--animate-img" style="background: url('{% static 'images/SongActiveAnimation/icon-playing.gif' %}') no-repeat 50% / contain">
+                                                    </div>
+                                                </div>
+                                                <div class="play-song--actions">
+                                                    <div class="control-btn btn-toggle-play btn--play-song">
+                                                        <i class="bi bi-play-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="playlist__song-body media__info">
+                                                <span class="playlist__song-title info__title">{{ track.track.track_name }}</span>
+                                                <p class="playlist__song-author info__author">
+
+                                                    <a href="#" class="is-ghost">{{ track.track.user }}</a>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span class="playlist__song-time media__content">{{ track.track.duration }}</span>
+                                        <div class="playlist__song-option song--tab media__right">
+                                            <div class="playlist__song-btn btn--mic option-btn hide-on-mobile">
+                                                <i class="btn--icon song__icon bi bi-mic-fill"></i>
+                                            </div>
+                                            <div class="playlist__song-btn song-btn--heart option-btn hide-on-mobile">
+                                                <i class="btn--icon song__icon icon--heart bi bi-heart-fill primary"></i>
+                                            </div>
+                                            <div class="playlist__song-btn option-btn ">
+                                                <i class="btn--icon bi bi-three-dots"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playlist section -->
+                <div class="grid container__tab tab-playlist mp3" id="playlist">
+                    <div class="container__section row">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Playlist&nbsp;</h3>
+                                </a>
+                                <h3 class="container__header-subtitle">Playlist</h3>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row playlist--container">
+                                <div class="col l-2-4 m-3 c-4 mb-30">
+                                    <div class="row__item  playlist--create item--playlist">
+                                        <div class="row__item-container flex--center item-create--properties">
+                                            <i class="bi bi-plus-lg album__create-icon"></i>
+                                            <span class="album__create-annotate text-center">Tạo playlist mới</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for playlist in Playlists %}
+                                <div class="col l-2-4 m-3 c-4 mb-30">
+                                    <div class="row__item item--playlist">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display br-5">
+                                                <div class="row__item-img img--square" style="background: url('{{ MEDIA_URL }}/media/{{ playlist.avatar }}') no-repeat center center / cover"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="action-btn btn--heart">
+                                                        <i class="btn--icon icon--heart bi bi-heart-fill primary"></i>
+                                                    </div>
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action-btn">
+                                                        <i class="btn--icon bi bi-three-dots"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="row__item-info">
+                                                <a href="#" class="row__info-name is-twoline">{{ playlist.playlist_name }}</a>
+                                                <h3 class="row__info-creator"></h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Album section -->
+                <div class="grid container__tab tab-album mp3" id="album">
+                    <div class="container__section row">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Album&nbsp;</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row album--container">
+                                {% for album in Albums %}
+                                <div class="col l-2-4 m-3 c-4 mb-30">
+                                    <div class="row__item item--album">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display br-5">
+                                                <div class="row__item-img img--square" style="background: url('{{ MEDIA_URL }}/media/{{ album.avatar }}') no-repeat center center / cover"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="action-btn btn--heart">
+                                                        <i class="btn--icon icon--heart bi bi-heart-fill primary"></i>
+                                                    </div>
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill icon-play"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action-btn">
+                                                        <i class="btn--icon bi bi-three-dots"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="row__item-info">
+                                                <a href="#" class="row__info-name is-twoline">{{ album.album_name }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MV section -->
+                <div class="grid container__tab tab-mv mp3" id="mv">
+                    <div class="container__section row">
+                        <div class="col l-12 m-12 c-12 mb-16">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>MV&nbsp;</h3>
+                                </a>
+                                <h3 class="container__header-subtitle">MV</h3>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row mv--container">
+                                {% for mv in MVs %}
+                                <div class="col l-4 m-6 c-12 mb-30">
+                                    <div class="row__item item--mv">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display br-5">
+                                                <div class="row__item-img img--mv" style="background: url('{{ MEDIA_URL }}/media/{{ mv.avatar }}') no-repeat center center / cover"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="action-btn mv-btn--close">
+                                                        <i class="bi bi-x-lg btn--icon"></i>
+                                                    </div>
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill icon-play"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                                <div class="mv__time">{{ mv.duration }}</div>
+                                            </div>
+                                            <div class="row__item-info media">
+                                                <div class="media__left">
+                                                    <div class="media__thumb is-rounded mr-10" style="background: url('./assets/img/mvArtists/artist1.jpg') no-repeat center center / cover"></div>
+                                                    <div class="media__info">
+                                                        <span class="info__title is-active is-twoline">{{ mv.mv_name }}</span>
+                                                        <p class="info__author">
+
+                                                            <a href="#" class="is-ghost">{{ mv.user }}</a>
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Artist section -->
+                <div class="grid container__tab tab-artist mp3" id="nghesi">
+                    <div class="container__section row">
+                        <div class="col l-12 m-12 c-12 mb-10">
+                            <div class="container__header">
+                                <a href="#" class="container__header-title">
+                                    <h3>Nghệ Sĩ&nbsp;</h3>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="row artist--container">
+
+                                <div class="col l-2-4 m-3 c-6 mb-30">
+                                    <div class="row__item item--artist">
+                                        <div class="row__item-container flex--top-left">
+                                            <div class="row__item-display is-rounded">
+                                                <div class="row__item-img img--square is-rounded" style="background: url('./assets/img/artists/artist1.jpg') no-repeat center center / contain"></div>
+                                                <div class="row__item-actions">
+                                                    <div class="btn--play-playlist">
+                                                        <div class="control-btn btn-toggle-play">
+                                                            <i class="bi bi-play-fill icon-play"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="overlay"></div>
+                                            </div>
+                                            <div class="row__item-info media artist--info">
+                                                <div class="media__left">
+                                                    <div href="#" class="row__info-name is-ghost mt-15 lh-19 text-center">
+                                                        Binz
+                                                        <i class="bi bi-star-fill row__info-icon">
+                                                            <div class="icon-overlay"></div>
+                                                        </i>
+                                                    </div>
+                                                    <h3 class="row__info-creator text-center">265K quan tâm</h3>
+                                                </div>
+                                            </div>
+                                            <div class="row__item-btn">
+                                                <button class="button is-small button-primary">
+                                                    <i class="bi bi-check2"></i>
+                                                    <span>&nbsp;Đã quan tâm</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload section -->
+                <div class="grid container__tab tab-upload mp3" id="tailen">
+                    <div class="container__section row">
+                        <div class="container__header col l-12 m-12 c-12 mb-10">
+                            <a href="#" class="container__header-title">
+                                <h3 class="f-sz-18 lh-27">Danh Sách Tải Lên&nbsp;</h3>
+                            </a>
+                        </div>
+                        <div class="col l-12 m-12 c-12">
+                            <div class="box--no-content">
+                                <div class="no-content-image"></div>
+                                <span class="no-content-text">Không có bài hát tải lên</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!-- process div tag as submit tag -->
